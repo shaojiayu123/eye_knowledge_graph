@@ -13,7 +13,9 @@ CALL apoc.create.addLabels(n, [split(row.`:LABEL`, ";")[0]]) YIELD node
 RETURN count(n);
 ```
 #### （2）导入关系文件
+```python
 LOAD CSV WITH HEADERS FROM 'file:///relationships.csv' AS row
 MATCH (start {id: row.`:START_ID`}), (end {id: row.`:END_ID`})
 CALL apoc.create.relationship(start, row.`TYPE`, {}, end) YIELD rel
 RETURN count(rel);
+```
